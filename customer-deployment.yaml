@@ -11,6 +11,9 @@ spec:
     metadata:
       labels:
         app: customer
+        environment: test
+        tier: frontend
+        department: engineering
     spec:
       containers:
       - name: customer
@@ -24,3 +27,30 @@ spec:
             value: "order"
         ports:
         - containerPort: 8080
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-node
+spec:
+  type: NodePort
+  selector:
+    app: customer
+  ports:
+  - port: 80
+    targetPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer
+spec:
+  type: ClusterIP
+  selector:
+    app: customer
+  ports:
+  - port: 80
+    targetPort: 8080
