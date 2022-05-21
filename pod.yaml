@@ -9,6 +9,9 @@ spec:
   - name: hello-world
     image: amigoscode/kubernetes:hello-world
     resources:
+      requests:
+        memory: "128Mi"
+        cpu: "500m"
       limits:
         memory: "128Mi"
         cpu: "500m"
